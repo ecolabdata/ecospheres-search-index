@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ecospheres-search-index"
+version = "0.1.0"
+description = "Search index for ecospheres-front"
+authors = ["Alexandre Bulté <alexandre@bulte.net>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "ecospheres_search_index"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+meilisearch = "^0.28.0"
+PyYAML = "^6.0"
+minicli = "^0.5.1"
+
+[tool.poetry.scripts]
+ecospheres-search = 'ecospheres_search_index.cli:run'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
