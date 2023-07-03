@@ -1,3 +1,5 @@
+import traceback
+
 from pathlib import Path
 
 import meilisearch
@@ -46,7 +48,7 @@ def index(
                 _index(data["data"])
         except Exception as e:
             print(f"[ERROR] {org}: {e}")
-            print(data and data.get("data"))
+            traceback.print_exc()
 
 
 if __name__ == "__main__":
