@@ -19,3 +19,7 @@ docker-compose up
 ```
 poetry run ecospheres-search index --config={path/to/ecospheres-front/config.yaml}
 ```
+
+## See also
+
+[Deploy a Meilisearch instance on Dokku](https://github.com/abulte/meilisearch-dokku).
