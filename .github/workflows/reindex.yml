@@ -2,8 +2,6 @@ name: reindex
 on:
   schedule:
     - cron:  '30 7 * * *'
-  # TODO: remove before merge
-  pull_request:
 
 jobs:
   reindex:
