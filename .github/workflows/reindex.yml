@@ -17,5 +17,7 @@ jobs:
         uses: abatilo/actions-poetry@v2
       - name: Install package
         run: poetry install
+      - name: Download config file
+        run: curl https://raw.githubusercontent.com/ecolabdata/ecospheres-front/main/config.yaml -o config.yaml
       - name: Run reindex job
-        run: poetry run ecospheres-search index --engine-url=https://ecospheres-search-index.app.france.sh/ --engine-secret=${{ secrets.MEILISEARCH_API_KEY }}
+        run: poetry run ecospheres-search index --engine-url=https://ecospheres-search-index.app.france.sh/ --engine-secret=${{ secrets.MEILISEARCH_API_KEY }} --config=config.yaml
