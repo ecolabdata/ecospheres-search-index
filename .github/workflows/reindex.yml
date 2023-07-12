@@ -1,0 +1,21 @@
+name: reindex
+on:
+  schedule:
+    - cron:  '30 7 * * *'
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2
+      - name: Install package
+        run: poetry install
+      - name: Download config file
+        run: curl https://raw.githubusercontent.com/ecolabdata/ecospheres-front/main/config.yaml -o config.yaml
+      - name: Run reindex job
+        run: poetry run ecospheres-search index --engine-url=https://ecospheres-search-index.app.france.sh/ --engine-secret=${{ secrets.MEILISEARCH_API_KEY }} --config=config.yaml
