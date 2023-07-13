@@ -1,0 +1,27 @@
+filterableAttributes:
+  - organization.name
+  - license
+
+searchableAttributes:
+  - title
+  - acronym
+  - description
+  - organization
+  - resources
+  - id
+
+rankingRules:
+  - words
+  # custom ranking rules (applied when no query and else act as booster)
+  - metrics.followers:desc
+  - metrics.reuses:desc
+  - metrics.discussions:desc
+  - metrics.views:desc
+  # end custom ranking rules
+  - attribute
+  - typo
+  - proximity
+  # default position
+  # - attribute
+  - sort
+  - exactness
