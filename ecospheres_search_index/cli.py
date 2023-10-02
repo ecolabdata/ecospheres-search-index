@@ -34,6 +34,7 @@ def index(
     config: Path = Path("../ecospheres-front/config.yaml"),
     engine_url: str = "http://localhost:7700",
     engine_secret: str = "secret",
+    drop: bool = False,
 ):
     """Build (or update) a full index from data.gouv.fr's API"""
     if not config.exists():
@@ -42,10 +43,14 @@ def index(
 
     client = meilisearch.Client(engine_url, api_key=engine_secret)
 
+    if drop:
+        print("Deleting all documents before indexing")
+        client.index("datasets").delete_all_documents()
+
     with config.open() as f:
         data = yaml.safe_load(f)
 
-    base_url = data["datagouvfr_api_url"]
+    base_url = data["datagouvfr_base_url"]
     organizations = data["organizations"]
 
     def _get(url):
@@ -60,7 +65,7 @@ def index(
     for org in organizations:
         try:
             print(f"Fetching {org}...")
-            url = f"{base_url}/1/datasets/?organization={org}"
+            url = f"{base_url}/api/1/datasets/?organization={org}"
             data = _get(url)
             _index(data["data"])
             while next := data["next_page"]:
