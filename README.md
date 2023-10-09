@@ -20,6 +20,8 @@ docker-compose up
 poetry run ecospheres-search index --config={path/to/ecospheres-front/config.yaml}
 ```
 
+Use `--drop` to delete all documents in the index before reindexing.
+
 ### Set the custom settings on the index
 
 Uses the settings defined in `settings.yaml`.
